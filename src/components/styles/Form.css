@@ -1,84 +1,89 @@
+/* Form.css */
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #ff8a00, #e52e71);
-    font-family: 'Arial', sans-serif;
+    height: 100vh;
     margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa; /* Fondo suave de azul azulejo */
 }
 
 form {
-    background-color: white;
+    background-color: #ffffff; /* Fondo blanco del formulario */
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
     padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 400px;
     width: 100%;
+    max-width: 400px;
     text-align: center;
-    animation: fadeIn 1s ease-in-out;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-#txtBienvenida {
-    font-family: 'Trebuchet MS', sans-serif;
-    font-size: 24px;
-    font-weight: bold;
-    color: #ff8a00;
+h1 {
+    color: #0277bd; /* Azul azulejo profundo */
+    font-size: 1.8rem;
     margin-bottom: 10px;
 }
 
-.txt {
-    font-family: 'Trebuchet MS', sans-serif;
-    font-size: 18px;
-    color: #555;
-    margin: 10px 0;
+h4 {
+    color: #01579b; /* Azul azulejo más oscuro */
+    margin: 15px 0 5px;
+    font-size: 1rem;
+    text-align: left;
 }
 
-.entry {
+input[type="email"],
+input[type="password"] {
     width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 25px;
-    border: 2px solid #e5e5e5;
-    font-size: 16px;
+    padding: 10px;
+    margin: 8px 0 20px;
+    border: 1px solid #81d4fa; /* Borde azul suave */
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #e1f5fe; /* Fondo azul claro en los inputs */
+    color: #0277bd; /* Texto en azul oscuro */
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #0288d1; /* Borde azul más profundo al enfocar */
     outline: none;
-    transition: border-color 0.3s;
+    box-shadow: 0px 0px 6px rgba(2, 136, 209, 0.3);
 }
 
-.entry:focus {
-    border-color: #ff8a00;
-}
-
-button, #btnIngresar, #btnChangePassword, #btnCrearCuenta {
+button {
     width: 100%;
     padding: 12px;
     margin-top: 15px;
     border: none;
-    border-radius: 25px;
-    background-color: #ff8a00;
-    color: white;
+    border-radius: 8px;
+    font-size: 1rem;
     font-weight: bold;
-    font-size: 16px;
+    color: #ffffff;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
 }
 
-button:hover, #btnIngresar:hover, #btnChangePassword:hover, #btnCrearCuenta:hover {
-    background-color: #e52e71;
-    transform: translateY(-3px);
+.btn {
+    background-color: #0288d1; /* Botón azul azulejo */
+    transition: background-color 0.3s ease;
 }
 
-button:active, #btnIngresar:active, #btnChangePassword:active, #btnCrearCuenta:active {
-    transform: translateY(1px);
+.btn:hover {
+    background-color: #0277bd; /* Azul más oscuro en hover */
 }
 
-#error {
-    color: red;
-    font-size: 14px;
-    margin-top: 5px;
+button[type="button"] {
+    background-color: #81d4fa; /* Azul suave para el botón de registro */
+    color: #01579b; /* Azul oscuro para el texto */
+}
+
+button[type="button"]:hover {
+    background-color: #4fc3f7; /* Azul un poco más intenso en hover */
+}
+
+p {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #d32f2f; /* Rojo suave para mensajes de error */
 }

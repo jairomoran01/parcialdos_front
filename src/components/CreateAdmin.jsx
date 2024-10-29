@@ -18,7 +18,7 @@ function CreateAdmin() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password, role: 'admin' }), // role: 'admin'
+                body: JSON.stringify({ email, password, role: 'admin' }),
             });
 
             if (response.ok) {
@@ -37,27 +37,34 @@ function CreateAdmin() {
         }
     };
 
+    const handleBack = () => {
+        navigate('/admin'); // Regresa a la vista de administración
+    };
+
     return (
-        <form onSubmit={createAdmin}>
-            <h1>Crear Administrador</h1>
-            <h4>Email</h4>
-            <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-            /><br />
-            <h4>Contraseña</h4>
-            <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-            /><br />
-            <button type="submit" className="btn">Crear Administrador</button>
-            {success && <p style={{ color: 'green' }}>{success}</p>}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-        </form>
+        <div className="create-admin-container">
+            <form onSubmit={createAdmin}>
+                <h1>Crear Administrador</h1>
+                <h4>Email</h4>
+                <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                /><br />
+                <h4>Contraseña</h4>
+                <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                /><br />
+                <button type="submit" className="btn">Crear Administrador</button>
+                {success && <p style={{ color: 'green' }}>{success}</p>}
+                {error && <p style={{ color: 'red' }}>{error}</p>}
+            </form>
+            <button className="btn" onClick={handleBack}>Volver a Admin Home</button>
+        </div>
     );
 }
 
