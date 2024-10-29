@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import './styles/UserHome.css';
 
 function UserHome() {
@@ -6,21 +6,13 @@ function UserHome() {
     const [registros, setRegistros] = useState([]);
     const [mensaje, setMensaje] = useState('');
   
-    useEffect(() => {
-        // Obtener los registros del backend al cargar el componente
-        fetch('http://localhost:4000/api/codigos')
-            .then(response => response.json())
-            .then(data => setRegistros(data))
-            .catch(error => console.error('Error al obtener los registros:', error));
-    }, []);
-  
     const handleRegistrarCodigo = () => {
         if (!/^\d{3}$/.test(codigo)) {
             setMensaje('El código debe ser un número de 3 dígitos entre 000 y 999.');
             return;
         }
   
-        fetch('http://localhost:4000/api/codigos', {
+        fetch('http://localhost:4000/api/validar-codigo', {  // Cambia a la ruta adecuada para validar el código
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,7 +22,14 @@ function UserHome() {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                setRegistros(prev => [...prev, data.nuevoRegistro]);
+                // Agrega el nuevo registro al estado de registros
+                const nuevoRegistro = {
+                    codigo,
+                    fecha: new Date().toLocaleDateString(),
+                    hora: new Date().toLocaleTimeString(),
+                    premio: data.premio || 'Sin premio'
+                };
+                setRegistros(prev => [...prev, nuevoRegistro]);
                 setMensaje('Código registrado exitosamente');
                 setCodigo('');
             } else {
