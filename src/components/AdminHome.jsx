@@ -10,7 +10,7 @@ function AdminHome({ user }) {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        fetch('http://localhost:4000/api/login', {
+        fetch('https://parcialdos-back.vercel.app/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: adminEmail, password: adminPassword })
