@@ -1,0 +1,81 @@
+.container {
+    height: 300px;
+    display: grid;
+    place-items: center;
+}
+
+/* Nuevo estilo para el contenedor de inicio de sesión de admin */
+.admin-login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #2d2d2d;
+    border-radius: 10px;
+    width: 300px;
+    margin-top: 20px;
+    color: white;
+}
+
+.admin-login-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.admin-login-container input {
+    margin: 10px 0;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+}
+
+#editSignos, #editPerfil {
+    margin-top: 0px;
+    margin: 100px;
+    width: 400px;
+    padding: 5px 50px 5px 10px;
+    border-radius: 10px;
+    background-color: rgb(71, 63, 63);
+    color: white;
+}
+
+#btnEditar, .btn {
+    margin-top: 10%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: brown;
+    color: white;
+    cursor: pointer;
+}
+
+#textoAdmin {
+    font-style: italic;
+}
+
+#textoEditar {
+    border-radius: 10px;
+    background-color: rgb(95, 82, 82);
+    color: white;
+    margin-bottom: 15px;
+}
+
+#btnHomeAdmin {
+    margin-top: 15px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: blue;
+    color: white;
+}
+
+.logout-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #f44336; /* Color rojo */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }  
