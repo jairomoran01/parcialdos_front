@@ -13,7 +13,7 @@ function CreateAccount() {
   const handleCreateAccount = (event) => {
     event.preventDefault();
 
-    fetch('https://parcialdos-back.vercel.app/api/registro', {
+    fetch('http://localhost:4000/api/registro', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

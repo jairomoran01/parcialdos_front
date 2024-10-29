@@ -12,7 +12,7 @@ function UserHome() {
             return;
         }
   
-        fetch('https://parcialdos-back.vercel.app/api/validar-codigo', {  // Cambia a la ruta adecuada para validar el código
+        fetch('http://localhost:4000/api/validar-codigo', {  // Cambia a la ruta adecuada para validar el código
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
