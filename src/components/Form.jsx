@@ -13,7 +13,7 @@ function Form({ callback }) {
         event.preventDefault();
 
         try {
-            const response = await axios.post('https://parcialdos-back.vercel.app/login', { email, password });
+            const response = await axios.post('/login', { email, password });
 
             if (response.status === 200) {
                 const data = response.data;
