@@ -1,45 +1,43 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from 'axios';
 import './styles/UserHome.css';
 
 function UserHome() {
     const [codigo, setCodigo] = useState('');
     const [registros, setRegistros] = useState([]);
     const [mensaje, setMensaje] = useState('');
+
+
+    useEffect(() => {
+        cargarCodigosRegistrados();
+    }, []);
+
+    const cargarCodigosRegistrados = async () => {
+        try {
+            const response = await axios.get('/codigos-registrados');
+            setRegistros(response.data);
+        } catch (error) {
+            console.error('Error al cargar códigos registrados:', error);
+        }
+    };
   
-    const handleRegistrarCodigo = () => {
+    const handleRegistrarCodigo = async () => {
         if (!/^\d{3}$/.test(codigo)) {
             setMensaje('El código debe ser un número de 3 dígitos entre 000 y 999.');
             return;
         }
-  
-        fetch('http://localhost:4000/api/validar-codigo', {  // Cambia a la ruta adecuada para validar el código
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ codigo }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Agrega el nuevo registro al estado de registros
-                const nuevoRegistro = {
-                    codigo,
-                    fecha: new Date().toLocaleDateString(),
-                    hora: new Date().toLocaleTimeString(),
-                    premio: data.premio || 'Sin premio'
-                };
-                setRegistros(prev => [...prev, nuevoRegistro]);
-                setMensaje('Código registrado exitosamente');
-                setCodigo('');
-            } else {
-                setMensaje(data.message || 'Error al registrar el código');
+
+        try {
+            const response = await axios.post('/codigos', { codigo });
+            setMensaje(response.data.message);
+            if (response.data.success) {
+                setRegistros([...registros, response.data]);
             }
-        })
-        .catch(error => {
-            console.error('Error al registrar el código:', error);
-            setMensaje('Error al registrar el código');
-        });
+            setCodigo('');
+            cargarCodigosRegistrados();
+        } catch (error) {
+            setMensaje(error.response?.data?.message || 'Error al procesar la solicitud.');
+        }
     };
   
     return (
@@ -68,8 +66,8 @@ function UserHome() {
                     {registros.map((registro, index) => (
                         <tr key={index}>
                             <td>{registro.codigo}</td>
-                            <td>{registro.fecha}</td>
-                            <td>{registro.hora}</td>
+                            <td>{new Date(registro.fecha).toLocaleDateString()}</td>
+                            <td>{new Date(registro.fecha).toLocaleTimeString()}</td>
                             <td>{registro.premio}</td>
                         </tr>
                     ))}

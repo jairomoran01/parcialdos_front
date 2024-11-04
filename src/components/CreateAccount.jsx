@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './styles/CreateAccount.css';
 
 function CreateAccount() {
@@ -67,6 +68,9 @@ function CreateAccount() {
       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
 
       <button type="submit">Guardar</button>
+      <Link to="/">
+        <button>Volver</button>
+      </Link>
     </form>
   );
 }

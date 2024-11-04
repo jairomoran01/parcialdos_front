@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Import axios
 import './styles/Form.css';
 
 function Form({ callback }) {
@@ -12,28 +13,22 @@ function Form({ callback }) {
         event.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:4000/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),  // Cambiado a email
-            });
+            const response = await axios.post('http://localhost:4000/api/login', { email, password });
 
-            if (response.ok) {
-                const data = await response.json();
+            if (response.status === 200) {
+                const data = response.data;
                 callback(data.role);
+
+                // Store the token in sessionStorage
+                sessionStorage.setItem('token', data.token);
 
                 if (data.role === 'user') {
                     goTo("/user");
                 }
-            } else {
-                const errorData = await response.json();
-                setError(errorData.message);
             }
         } catch (error) {
             console.error('Error en la autenticación:', error);
-            setError('Error al intentar iniciar sesión.');
+            setError(error.response?.data?.message || 'Error al intentar iniciar sesión.');
         }
     };
 

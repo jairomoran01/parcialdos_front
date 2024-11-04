@@ -2,13 +2,35 @@ import './App.css';
 import Form from './components/Form';
 import UserHome from './components/UserHome';
 import AdminHome from './components/AdminHome';
-import CreateAccount from './components/CreateAccount'; // Importa el nuevo componente
-import CreateAdmin from './components/CreateAdmin'; // Importa el nuevo componente CreateAdmin
+import CreateAccount from './components/CreateAccount';
+import CreateAdmin from './components/CreateAdmin';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'; 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
+// Set up axios defaults
+axios.defaults.baseURL = 'http://localhost:4000/api'; // Set your API base URL
 
 function App() {
   const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Set up axios interceptor
+    const interceptor = axios.interceptors.request.use(function (config) {
+      const token = sessionStorage.getItem('token');
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    }, function (error) {
+      return Promise.reject(error);
+    });
+
+    // Clean up function to eject the interceptor when the component unmounts
+    return () => {
+      axios.interceptors.request.eject(interceptor);
+    };
+  }, []);
 
   return (  
     <BrowserRouter>
