@@ -64,7 +64,6 @@ function Form({ callback }) {
         <Link to="/admin">
             <button>Administrar</button>
         </Link>
-    // Rest of your component
   </div>
         
     );
