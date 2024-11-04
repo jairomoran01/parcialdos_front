@@ -14,7 +14,7 @@ function UserHome() {
 
     const cargarCodigosRegistrados = async () => {
         try {
-            const response = await axios.get('/codigos-registrados');
+            const response = await axios.get('https://parcialdos-back.vercel.app/codigos-registrados');
             setRegistros(response.data);
         } catch (error) {
             console.error('Error al cargar códigos registrados:', error);
@@ -28,7 +28,7 @@ function UserHome() {
         }
 
         try {
-            const response = await axios.post('/codigos', { codigo });
+            const response = await axios.post('https://parcialdos-back.vercel.app/codigos', { codigo });
             setMensaje(response.data.message);
             if (response.data.success) {
                 setRegistros([...registros, response.data]);

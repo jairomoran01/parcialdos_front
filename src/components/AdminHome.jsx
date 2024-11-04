@@ -18,7 +18,7 @@ function AdminHome({ user }) {
 
     const fetchWinners = async () => {
         try {
-            const response = await axios.get('/winners');
+            const response = await axios.get('https://parcialdos-back.vercel.app/winners');
             setWinners(response.data);
         } catch (error) {
             console.error('Error fetching winners:', error);
@@ -28,7 +28,7 @@ function AdminHome({ user }) {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/login', { email: adminEmail, password: adminPassword });
+            const response = await axios.post('https://parcialdos-back.vercel.app/login', { email: adminEmail, password: adminPassword });
             if (response.data.role === 'admin') {
                 setIsLoggedIn(true);
                 sessionStorage.setItem('token', response.data.token);
