@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios'; // Import axios
 import './styles/Form.css';
 
@@ -37,6 +38,7 @@ function Form({ callback }) {
     };
 
     return (
+        <div>
         <form onSubmit={validateUser}>
             <h1>Bienvenido a la App de Premios</h1>
             <h4>Correo Electrónico</h4>  
@@ -59,6 +61,12 @@ function Form({ callback }) {
                 Registrarse
             </button>
         </form>
+        <Link to="/admin">
+            <button>Administrar</button>
+        </Link>
+    // Rest of your component
+  </div>
+        
     );
 }
 
